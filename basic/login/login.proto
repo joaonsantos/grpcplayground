@@ -1,0 +1,26 @@
+syntax = "proto3";
+package login;
+
+option go_package = "./login";
+
+import "google/protobuf/timestamp.proto";
+
+message Login {
+    string username = 1;
+    google.protobuf.Timestamp last_login = 2;
+}
+
+message LoginList {
+    repeated Login logins = 1;
+}
+
+message User {
+    string name = 1;
+}
+
+message Void {}
+
+service Log {
+    rpc List(Void) returns(LoginList) {}
+    rpc Save(User) returns(Login) {}
+}
